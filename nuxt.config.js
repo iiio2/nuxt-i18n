@@ -53,6 +53,10 @@ export default {
             message: "Message",
             save: "Save",
           },
+          auth: {
+            login: "Login with Google",
+            logout: "Logout",
+          },
         },
         fr: {
           welcome: "Bienvenue",
@@ -62,6 +66,10 @@ export default {
             message: "message",
             save: "sauvegarder",
           },
+          auth: {
+            login: "Connectez-vous avec Google",
+            logout: "Se déconnecter",
+          },
         },
         es: {
           welcome: "Bienvenido",
@@ -70,6 +78,10 @@ export default {
             email: "Email",
             message: "mensaje",
             save: "Ahorrar",
+          },
+          auth: {
+            login: "Iniciar sesión con Google",
+            logout: "cerrar sesión",
           },
         },
       },
