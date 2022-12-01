@@ -47,12 +47,30 @@ export default {
       messages: {
         en: {
           welcome: "Welcome",
+          contact: {
+            name: "Name",
+            email: "Email",
+            message: "Message",
+            save: "Save",
+          },
         },
         fr: {
           welcome: "Bienvenue",
+          contact: {
+            name: "Nom",
+            email: "e-mail",
+            message: "message",
+            save: "sauvegarder",
+          },
         },
         es: {
           welcome: "Bienvenido",
+          contact: {
+            name: "nombre",
+            email: "Email",
+            message: "mensaje",
+            save: "Ahorrar",
+          },
         },
       },
     },
