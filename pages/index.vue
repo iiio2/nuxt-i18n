@@ -1,5 +1,5 @@
 <template>
-  <h3>Hello World {{ $t("welcome") }}</h3>
+  <h3>{{ $t("welcome") }}</h3>
 </template>
 
 <script></script>

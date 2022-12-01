@@ -11,5 +11,8 @@ export default {
   components: {
     Navbar,
   },
+  head() {
+    return this.$nuxtI18nHead();
+  },
 };
 </script>

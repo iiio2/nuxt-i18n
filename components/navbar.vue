@@ -1,7 +1,7 @@
 <template>
   <div>
-    <NuxtLink to="/">Home</NuxtLink>
-    <NuxtLink to="/about">About</NuxtLink>
+    <NuxtLink :to="localePath('/')">Home</NuxtLink>
+    <NuxtLink :to="localePath('/about')">About</NuxtLink>
 
     <NuxtLink :to="switchLocalePath('es')">Spanish</NuxtLink>
     <NuxtLink :to="switchLocalePath('fr')">French</NuxtLink>
