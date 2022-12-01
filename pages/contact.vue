@@ -39,7 +39,7 @@ export default {
         email: this.email,
         message: this.message,
       });
-      console.log("Document written with ID: ", docRef.id);
+      console.log(docRef);
     },
   },
   mounted() {
