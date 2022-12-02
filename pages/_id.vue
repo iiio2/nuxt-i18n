@@ -13,12 +13,36 @@
       </div>
       <button @click.prevent="editPost">Save</button>
     </form>
+    <div class="comments">
+      <h4>Comments</h4>
+      <li v-for="comment in comments">
+        {{ comment }}
+      </li>
+
+      <form @submit.prevent="addComment">
+        <label for="comment">Write Comment</label>
+        <input
+          name="comment"
+          type="text"
+          class="form-control"
+          v-model="comment"
+        />
+      </form>
+    </div>
   </div>
 </template>
 
 <script>
 import moment from "moment";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  query,
+  where,
+  updateDoc,
+  getDocs,
+  collection,
+} from "firebase/firestore";
 import { db } from "../firebase/firebase";
 
 export default {
@@ -26,6 +50,8 @@ export default {
     return {
       title: "",
       body: "",
+      comments: [],
+      comment: "",
     };
   },
   methods: {
@@ -38,16 +64,36 @@ export default {
       });
       this.$router.push("/blog");
     },
+    async addComment() {
+      console.log(this.comment);
+      const q = query(
+        collection(db, "comments"),
+        where("postId", "==", this.id)
+      );
+
+      const commentSnap = await getDocs(q);
+      console.log(commentSnap);
+    },
   },
   async asyncData({ params }) {
     const id = params.id;
     return { id };
   },
   async mounted() {
+    const q = query(collection(db, "comments"), where("postId", "==", this.id));
+
+    const commentSnap = await getDocs(q);
+
+    commentSnap.forEach((doc) => {
+      this.comments = doc.data().comment;
+      console.log(doc.id, "=>", doc.data());
+    });
+
     const docRef = doc(db, "posts", this.id);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
+      console.log(docSnap.data());
       const { title, body } = docSnap.data();
       this.title = title;
       this.body = body;
