@@ -54,6 +54,7 @@ export default {
         body: this.body,
         createAt: moment().format("LLL"),
         updatedAt: moment().format("LLL"),
+        comments: [],
       });
     },
   },

@@ -42,6 +42,7 @@ import {
   updateDoc,
   getDocs,
   collection,
+  addDoc,
 } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 
@@ -55,6 +56,17 @@ export default {
     };
   },
   methods: {
+    async addComment() {
+      const docRef = doc(db, "posts", this.id);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        this.comments.push(this.comment);
+        await updateDoc(docRef, {
+          comments: this.comments,
+        });
+      }
+    },
     async editPost() {
       const docRef = doc(db, "posts", this.id);
       await updateDoc(docRef, {
@@ -64,39 +76,21 @@ export default {
       });
       this.$router.push("/blog");
     },
-    async addComment() {
-      console.log(this.comment);
-      const q = query(
-        collection(db, "comments"),
-        where("postId", "==", this.id)
-      );
-
-      const commentSnap = await getDocs(q);
-      console.log(commentSnap);
-    },
   },
   async asyncData({ params }) {
     const id = params.id;
     return { id };
   },
   async mounted() {
-    const q = query(collection(db, "comments"), where("postId", "==", this.id));
-
-    const commentSnap = await getDocs(q);
-
-    commentSnap.forEach((doc) => {
-      this.comments = doc.data().comment;
-      console.log(doc.id, "=>", doc.data());
-    });
-
     const docRef = doc(db, "posts", this.id);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
       console.log(docSnap.data());
-      const { title, body } = docSnap.data();
+      const { title, body, comments } = docSnap.data();
       this.title = title;
       this.body = body;
+      this.comments = comments;
     }
   },
 };
