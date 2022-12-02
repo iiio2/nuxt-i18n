@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form ref="form">
     <div class="form-group">
       <label for="name">{{ $t("contact.name") }}</label>
       <input name="name" v-model="name" class="form-control" />
@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import emailjs from "@emailjs/browser";
 import { db } from "../firebase/firebase";
 import { collection, addDoc } from "firebase/firestore";
 
@@ -32,14 +33,18 @@ export default {
   },
   methods: {
     async add() {
-      console.log(this.name, this.email, this.message);
-
       const docRef = await addDoc(collection(db, "/contact"), {
         name: this.name,
         email: this.email,
         message: this.message,
       });
       console.log(docRef);
+      emailjs.sendForm(
+        process.env.NUXT_ENV_SERVICE_ID,
+        process.env.NUXT_ENV_TEMPLATE_ID,
+        this.$refs.form,
+        process.env.NUXT_ENV_PUBLIC_KEY
+      );
     },
   },
   mounted() {
