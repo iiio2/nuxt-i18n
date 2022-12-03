@@ -10,7 +10,7 @@
     </button>
     <h4 class="text-2xl">{{ name }}</h4>
     <button
-      class="bg--500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       v-if="name"
       @click.prevent="logout"
     >
