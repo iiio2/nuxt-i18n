@@ -1,8 +1,12 @@
 <template>
   <div>
-    <h3>Blog</h3>
+    <h3 class="font-bold text-3xl">Blog</h3>
     <li v-for="post in posts">
-      Title - <NuxtLink :to="post.id">{{ post.title }}</NuxtLink> | Body -
+      Title -
+      <NuxtLink class="underline underline-offset-4" :to="post.id">{{
+        post.title
+      }}</NuxtLink>
+      | Body -
       {{ post.body }}
     </li>
   </div>

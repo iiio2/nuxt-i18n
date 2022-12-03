@@ -1,9 +1,21 @@
 <template>
   <div>
-    <h3>{{ $t("welcome") }}</h3>
-    <button v-if="!name" @click.prevent="login">{{ $t("auth.login") }}</button>
-    <h4>{{ name }}</h4>
-    <button v-if="name" @click.prevent="logout">{{ $t("auth.logout") }}</button>
+    <h3 class="font-bold text-3xl">{{ $t("welcome") }}</h3>
+    <button
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      v-if="!name"
+      @click.prevent="login"
+    >
+      {{ $t("auth.login") }}
+    </button>
+    <h4 class="text-2xl">{{ name }}</h4>
+    <button
+      class="bg--500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      v-if="name"
+      @click.prevent="logout"
+    >
+      {{ $t("auth.logout") }}
+    </button>
     <hr />
     <form v-if="name">
       <div class="form-group">
@@ -14,7 +26,12 @@
         <label for="body">Body</label>
         <input name="body" type="text" class="form-control" v-model="body" />
       </div>
-      <button @click.prevent="createPost">Save</button>
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        @click.prevent="createPost"
+      >
+        Save
+      </button>
     </form>
   </div>
 </template>

@@ -11,10 +11,15 @@
         <label for="body">Body</label>
         <input name="body" type="text" class="form-control" v-model="body" />
       </div>
-      <button @click.prevent="editPost">Save</button>
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        @click.prevent="editPost"
+      >
+        Save
+      </button>
     </form>
     <div class="comments">
-      <h4>Comments</h4>
+      <h4 class="text-3xl">Comments</h4>
       <li v-for="comment in comments">
         {{ comment }}
       </li>
